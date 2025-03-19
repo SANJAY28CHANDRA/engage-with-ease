@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -58,12 +57,11 @@ const LoginPage = () => {
       {/* Right side - Login form */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          <h1 className="text-3xl font-bold text-white mb-6">Login</h1>
-          
+          <h1 className="text-3xl font-bold text-white mb-2">Login</h1>
           <p className="text-gray-400 mb-6">
-            You can login with your registered account or quick login with your Google account.
+            Welcome back! Please enter your credentials to access your account.
           </p>
-
+          
           {/* Google login button */}
           <button className="w-full flex items-center justify-center gap-3 bg-white text-gray-800 py-3 px-4 rounded-md font-medium mb-6 hover:bg-gray-100 transition-colors">
             <svg viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">

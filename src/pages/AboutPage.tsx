@@ -1,12 +1,14 @@
-
 import MainLayout from "../components/MainLayout";
+import Header from "../components/Header";
 
 const AboutPage = () => {
   return (
     <MainLayout isLoggedIn={true}>
+      <Header title="About ConnectForum">
+        <p>Learn about our platform and community guidelines</p>
+      </Header>
+      
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">About ConnectForum</h1>
-        
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
           <div className="bg-gradient-to-br from-purple-500 to-blue-400 rounded-lg p-6 transform hover:scale-105 transition-transform">
             <h3 className="text-xl font-semibold mb-2">#Free Speech</h3>

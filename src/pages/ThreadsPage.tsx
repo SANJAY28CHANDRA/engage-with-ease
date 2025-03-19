@@ -6,6 +6,7 @@ import { MOCK_THREADS } from "../data/mockData";
 import { Smile, Bold, Italic, List, ListOrdered, Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import Header from "../components/Header";
 
 const ThreadsPage = () => {
   const [newPost, setNewPost] = useState("");
@@ -33,6 +34,10 @@ const ThreadsPage = () => {
   return (
     <MainLayout isLoggedIn={true}>
       <div>
+        <Header title="Threads">
+          <p>Create and explore discussions with the community</p>
+        </Header>
+
         {/* Create Post Area */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-3">

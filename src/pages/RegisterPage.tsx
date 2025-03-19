@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -47,7 +46,10 @@ const RegisterPage = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#1A1F2C] p-6">
       <div className="w-full max-w-md">
-        <h1 className="text-3xl font-bold text-white text-center mb-8">Register</h1>
+        <h1 className="text-3xl font-bold text-white text-center mb-2">Register</h1>
+        <p className="text-gray-400 text-center mb-8">
+          Join our community to start discussions and connect with others
+        </p>
         
         <form onSubmit={handleRegister} className="space-y-6">
           <div>

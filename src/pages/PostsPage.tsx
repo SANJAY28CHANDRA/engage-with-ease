@@ -3,12 +3,15 @@ import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
 import { MOCK_THREADS } from "../data/mockData";
 import { Button } from "@/components/ui/button";
+import Header from "../components/Header";
 
 const PostsPage = () => {
   return (
     <MainLayout isLoggedIn={true}>
       <div>
-        <h1 className="text-3xl font-bold mb-6">Posts</h1>
+        <Header title="Posts">
+          <p>Browse all posts from the community</p>
+        </Header>
         
         {/* Filter buttons */}
         <div className="flex gap-4 mb-6 overflow-x-auto pb-2">

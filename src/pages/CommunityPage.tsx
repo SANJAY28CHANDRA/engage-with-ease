@@ -4,6 +4,7 @@ import MainLayout from "../components/MainLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import Header from "../components/Header";
 
 const CommunityPage = () => {
   const [communityName, setCommunityName] = useState("");
@@ -32,6 +33,10 @@ const CommunityPage = () => {
   return (
     <MainLayout isLoggedIn={true}>
       <div className="max-w-2xl mx-auto">
+        <Header title="Communities">
+          <p>Join existing communities or create your own</p>
+        </Header>
+        
         <h1 className="text-3xl font-bold mb-8 text-center">
           Top community that you can join & discuss
         </h1>

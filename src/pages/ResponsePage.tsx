@@ -7,6 +7,7 @@ import { MOCK_THREADS } from "../data/mockData";
 import { Button } from "@/components/ui/button";
 import { ThumbsUp, ThumbsDown, Share, Save, MessageSquare } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
+import Header from "../components/Header";
 
 const ResponsePage = () => {
   const { id } = useParams();
@@ -38,6 +39,10 @@ const ResponsePage = () => {
   return (
     <MainLayout isLoggedIn={true}>
       <div>
+        <Header title="Thread Responses">
+          <p>Join the conversation by adding your thoughts</p>
+        </Header>
+        
         <ThreadCard thread={thread} />
         
         {/* Responses */}

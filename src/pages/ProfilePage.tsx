@@ -3,6 +3,7 @@ import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
 import { MOCK_USER, MOCK_THREADS } from "../data/mockData";
 import { Button } from "@/components/ui/button";
+import Header from "../components/Header";
 
 const ProfilePage = () => {
   // Filter threads to only show those created by the current user
@@ -11,6 +12,10 @@ const ProfilePage = () => {
   return (
     <MainLayout isLoggedIn={true}>
       <div>
+        <Header title="My Profile">
+          <p>Manage your profile and view your contributions</p>
+        </Header>
+        
         {/* Profile Header */}
         <div className="mb-8">
           <div className="h-40 bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-400 rounded-lg mb-4"></div>

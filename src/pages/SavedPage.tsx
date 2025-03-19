@@ -2,6 +2,8 @@
 import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
 import { MOCK_THREADS } from "../data/mockData";
+import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const SavedPage = () => {
   // Filter threads to only show saved ones
@@ -10,7 +12,9 @@ const SavedPage = () => {
   return (
     <MainLayout isLoggedIn={true}>
       <div>
-        <h1 className="text-3xl font-bold mb-6">Saved</h1>
+        <Header title="Saved Threads">
+          <p>Access your bookmarked threads for easy reference</p>
+        </Header>
         
         {savedThreads.length > 0 ? (
           savedThreads.map(thread => (
