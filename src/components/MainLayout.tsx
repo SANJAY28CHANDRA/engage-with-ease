@@ -1,8 +1,8 @@
 
 import { ReactNode, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { CATEGORIES, HAPPENING_NOW, TRENDING_TOPICS } from "../data/mockData";
-import { Search, Users } from "lucide-react";
+import { Search, Users, Bell } from "lucide-react";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -11,6 +11,27 @@ interface MainLayoutProps {
 
 const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Handle login/logout
+  const handleAuthAction = () => {
+    if (isLoggedIn) {
+      // Logout logic would go here
+      navigate("/login");
+    } else {
+      navigate("/login");
+    }
+  };
+
+  // Navigation links
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Threads", path: "/threads" },
+    { name: "Contact Us", path: "/contact" },
+    { name: "Help and Support", path: "/help" }
+  ];
 
   return (
     <div className="flex min-h-screen bg-[#1A1F2C] text-white font-sans">
@@ -104,9 +125,9 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
       {/* Main Content */}
       <div className="flex-1 flex">
         <div className="flex-1 max-w-4xl">
-          {/* Search Bar */}
+          {/* Header with Search and Navigation */}
           <div className="flex items-center justify-between p-4 border-b border-gray-800">
-            <div className="flex-1 max-w-md mx-auto">
+            <div className="flex-1 max-w-md">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                 <input
@@ -118,6 +139,25 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
                 />
               </div>
             </div>
+            
+            {/* Navigation Bar */}
+            <div className="bg-blue-500 bg-opacity-20 rounded-lg px-6 py-2 ml-6">
+              <nav className="flex items-center space-x-6">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`px-2 py-1 ${
+                      location.pathname === link.path
+                        ? "text-white font-medium"
+                        : "text-gray-300 hover:text-white"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </nav>
+            </div>
           </div>
 
           {/* Main Content Area */}
@@ -128,15 +168,12 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
 
         {/* Right Sidebar */}
         <div className="w-80 border-l border-gray-800 flex flex-col p-4">
-          {isLoggedIn ? (
-            <Link to="/logout" className="block p-4 mb-4 bg-gray-800 rounded-lg text-center hover:bg-gray-700">
-              LogOut
-            </Link>
-          ) : (
-            <Link to="/login" className="block p-4 mb-4 bg-gray-800 rounded-lg text-center hover:bg-gray-700">
-              Login
-            </Link>
-          )}
+          <button 
+            onClick={handleAuthAction}
+            className="block p-4 mb-4 bg-gray-800 rounded-lg text-center hover:bg-gray-700"
+          >
+            {isLoggedIn ? "LogOut" : "Login"}
+          </button>
 
           {/* Trending Topics */}
           <div className="mb-6">
@@ -159,7 +196,7 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
           <div>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-medium">Whats Happenning?</h3>
-              <span className="text-xl">🔔</span>
+              <Bell size={18} />
             </div>
             <div className="space-y-2">
               {HAPPENING_NOW.map((topic) => (
