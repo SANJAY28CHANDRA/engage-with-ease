@@ -1,4 +1,3 @@
-
 import { ReactNode, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { CATEGORIES, HAPPENING_NOW, TRENDING_TOPICS } from "../data/mockData";
@@ -14,17 +13,14 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Handle login/logout
   const handleAuthAction = () => {
     if (isLoggedIn) {
-      // Logout logic would go here
       navigate("/login");
     } else {
       navigate("/login");
     }
   };
 
-  // Navigation links
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -35,9 +31,7 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
 
   return (
     <div className="flex min-h-screen bg-[#1A1F2C] text-white font-sans">
-      {/* Left Sidebar */}
       <div className="w-72 border-r border-gray-800 flex flex-col">
-        {/* Logo */}
         <div className="flex items-center gap-3 p-4 border-b border-gray-800">
           <img 
             src="/lovable-uploads/3643078d-e026-4cc8-9c94-04fe222cf4bc.png" 
@@ -50,7 +44,6 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
           </div>
         </div>
 
-        {/* Menu */}
         <nav className="flex flex-col gap-2 p-4">
           <Link to="/profile" className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md">
             <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
@@ -58,7 +51,7 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
             </div>
             <span>Profile</span>
           </Link>
-          <Link to="/threads" className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md">
+          <Link to="/profile" className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md">
             <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
               <span className="text-xl">#</span>
             </div>
@@ -72,7 +65,6 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
           </Link>
         </nav>
 
-        {/* Categories */}
         <div className="p-4 border-t border-gray-800">
           <h3 className="text-lg font-bold mb-3">Categories</h3>
           <div className="flex flex-col gap-2">
@@ -89,7 +81,6 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
           </div>
         </div>
 
-        {/* Create Community Button */}
         <div className="p-4">
           <Link 
             to="/create-community" 
@@ -102,7 +93,6 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
           </Link>
         </div>
 
-        {/* Social Icons */}
         <div className="mt-auto p-4 border-t border-gray-800">
           <div className="flex gap-4 mb-4">
             <Link to="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
@@ -122,10 +112,8 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 flex">
         <div className="flex-1 max-w-4xl">
-          {/* Header with Search and Navigation */}
           <div className="flex items-center justify-between p-4 border-b border-gray-800">
             <div className="flex-1 max-w-md">
               <div className="relative">
@@ -140,7 +128,6 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
               </div>
             </div>
             
-            {/* Navigation Bar */}
             <div className="bg-blue-500 bg-opacity-20 rounded-lg px-6 py-2 ml-6">
               <nav className="flex items-center space-x-6">
                 {navLinks.map((link) => (
@@ -160,13 +147,11 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
             </div>
           </div>
 
-          {/* Main Content Area */}
           <div className="p-6">
             {children}
           </div>
         </div>
 
-        {/* Right Sidebar */}
         <div className="w-80 border-l border-gray-800 flex flex-col p-4">
           <button 
             onClick={handleAuthAction}
@@ -175,7 +160,6 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
             {isLoggedIn ? "LogOut" : "Login"}
           </button>
 
-          {/* Trending Topics */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-medium">Trending Topics</h3>
@@ -192,7 +176,6 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
             </div>
           </div>
 
-          {/* What's Happening */}
           <div>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-medium">Whats Happenning?</h3>
