@@ -1,7 +1,8 @@
+
 import { ReactNode, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { CATEGORIES, HAPPENING_NOW, TRENDING_TOPICS } from "../data/mockData";
-import { Search, Users, Bell } from "lucide-react";
+import { Search, Users, Bell, ExternalLink } from "lucide-react";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -167,12 +168,17 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
             </div>
             <div className="space-y-2">
               {TRENDING_TOPICS.map((topic) => (
-                <div key={topic.name} className="flex items-center gap-2">
+                <Link 
+                  key={topic.name} 
+                  to={`/topic/${topic.name.toLowerCase().replace(/\s+/g, '-')}`}
+                  className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded-md group"
+                >
                   <div className="w-8 h-8 bg-green-300 rounded-full"></div>
-                  <span className="text-sm">{topic.name}</span>
-                </div>
+                  <span className="text-sm flex-1">{topic.name}</span>
+                  <ExternalLink size={14} className="text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
               ))}
-              <button className="text-sm text-gray-400 hover:text-white">see more</button>
+              <button className="text-sm text-gray-400 hover:text-white ml-2">see more</button>
             </div>
           </div>
 
@@ -183,13 +189,20 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
             </div>
             <div className="space-y-2">
               {HAPPENING_NOW.map((topic) => (
-                <div key={topic} className="flex items-center justify-between">
+                <Link 
+                  key={topic} 
+                  to={`/topic/${topic.toLowerCase().replace(/\s+/g, '-').replace('-', '')}`}
+                  className="flex items-center justify-between p-2 hover:bg-gray-800 rounded-md group"
+                >
                   <div className="flex items-center gap-2">
                     <span className="text-gray-400 text-xl">#</span>
                     <span className="text-sm">{topic}</span>
                   </div>
-                  <span className="text-sm text-gray-400">6h ago</span>
-                </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-400">6h ago</span>
+                    <ExternalLink size={14} className="text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
