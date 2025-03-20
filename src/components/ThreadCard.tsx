@@ -31,30 +31,38 @@ const ThreadCard = ({ thread, showResponses = false, isLoggedIn = false }: Threa
   };
 
   const handleLike = () => {
-    if (handleAuthAction("like this thread")) {
+    if (isLoggedIn) {
       setLikes(likes + 1);
+    } else {
+      handleAuthAction("like this thread");
     }
   };
 
   const handleDislike = () => {
-    if (handleAuthAction("dislike this thread")) {
+    if (isLoggedIn) {
       setDislikes(dislikes + 1);
+    } else {
+      handleAuthAction("dislike this thread");
     }
   };
 
   const handleSave = () => {
-    if (handleAuthAction("save this thread")) {
+    if (isLoggedIn) {
       setSaved(!saved);
+    } else {
+      handleAuthAction("save this thread");
     }
   };
 
   const handleShare = () => {
-    if (handleAuthAction("share this thread")) {
+    if (isLoggedIn) {
       // Sharing functionality would go here
       toast({
         title: "Share",
         description: "Sharing functionality coming soon!",
       });
+    } else {
+      handleAuthAction("share this thread");
     }
   };
 
@@ -146,27 +154,43 @@ const ThreadCard = ({ thread, showResponses = false, isLoggedIn = false }: Threa
               <div className="flex ml-10 mt-2">
                 <button 
                   className="flex items-center gap-1"
-                  onClick={() => handleAuthAction("like this response")}
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      handleAuthAction("like this response");
+                    }
+                  }}
                 >
                   <ThumbsUp size={16} />
                   <span className="text-sm">{response.likes}</span>
                 </button>
                 <button 
                   className="flex items-center gap-1 ml-2"
-                  onClick={() => handleAuthAction("dislike this response")}
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      handleAuthAction("dislike this response");
+                    }
+                  }}
                 >
                   <ThumbsDown size={16} />
                   <span className="text-sm">{response.dislikes}</span>
                 </button>
                 <button 
                   className="ml-2"
-                  onClick={() => handleAuthAction("share this response")}
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      handleAuthAction("share this response");
+                    }
+                  }}
                 >
                   <Share size={16} />
                 </button>
                 <button 
                   className="ml-auto"
-                  onClick={() => handleAuthAction("save this response")}
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      handleAuthAction("save this response");
+                    }
+                  }}
                 >
                   <Save size={16} />
                 </button>

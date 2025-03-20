@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
@@ -12,6 +13,7 @@ const ThreadsPage = () => {
   const [newPost, setNewPost] = useState("");
   const navigate = useNavigate();
   
+  // For demo purposes, controlling login state
   const isLoggedIn = false;
 
   const handlePost = () => {
@@ -102,7 +104,7 @@ const ThreadsPage = () => {
         {/* Threads */}
         <div>
           {MOCK_THREADS.map((thread) => (
-            <ThreadCard key={thread.id} thread={thread} showResponses={true} />
+            <ThreadCard key={thread.id} thread={thread} showResponses={true} isLoggedIn={isLoggedIn} />
           ))}
         </div>
       </div>

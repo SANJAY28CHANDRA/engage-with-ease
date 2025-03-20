@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
@@ -13,8 +14,7 @@ const ResponsePage = () => {
   const [response, setResponse] = useState("");
   const navigate = useNavigate();
   
-  // For demo purposes, we'll assume the user is not logged in
-  // In a real app, this would come from auth context
+  // For demo purposes, controlling login state
   const isLoggedIn = false;
   
   // Find the thread by ID, fallback to the first thread if not found
@@ -57,7 +57,7 @@ const ResponsePage = () => {
           <p>Join the conversation by adding your thoughts</p>
         </Header>
         
-        <ThreadCard thread={thread} />
+        <ThreadCard thread={thread} isLoggedIn={isLoggedIn} />
         
         {/* Responses */}
         <div className="mt-8">

@@ -30,6 +30,7 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
         description: `Please login to ${actionName}`,
         variant: "destructive",
       });
+      setTimeout(() => navigate("/login"), 1500);
       return false;
     }
     return true;
@@ -39,7 +40,6 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
     if (!isLoggedIn) {
       e.preventDefault();
       handleAuthRequired(destination, actionName);
-      setTimeout(() => navigate("/login"), 1500);
     }
   };
 
