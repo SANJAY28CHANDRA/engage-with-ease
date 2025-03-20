@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
@@ -26,6 +27,8 @@ const ThreadsPage = () => {
       return;
     }
     
+    // If the user is logged in, we skip the authentication notification
+    // and only check if the post content is empty
     if (!newPost.trim()) {
       toast({
         title: "Error",
