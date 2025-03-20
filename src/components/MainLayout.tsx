@@ -3,6 +3,7 @@ import { ReactNode, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { CATEGORIES, HAPPENING_NOW, TRENDING_TOPICS } from "../data/mockData";
 import { Search, Users, Bell, ExternalLink } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -19,6 +20,26 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
       navigate("/login");
     } else {
       navigate("/login");
+    }
+  };
+
+  const handleAuthRequired = (destination: string, actionName: string) => {
+    if (!isLoggedIn) {
+      toast({
+        title: "Authentication Required",
+        description: `Please login to ${actionName}`,
+        variant: "destructive",
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const handleAuthLink = (e: React.MouseEvent<HTMLAnchorElement>, destination: string, actionName: string) => {
+    if (!isLoggedIn) {
+      e.preventDefault();
+      handleAuthRequired(destination, actionName);
+      setTimeout(() => navigate("/login"), 1500);
     }
   };
 
@@ -46,19 +67,31 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
         </div>
 
         <nav className="flex flex-col gap-2 p-4">
-          <Link to="/profile" className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md">
+          <Link 
+            to="/profile" 
+            className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md"
+            onClick={(e) => handleAuthLink(e, "/profile", "view your profile")}
+          >
             <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
               <Users size={18} />
             </div>
             <span>Profile</span>
           </Link>
-          <Link to="/profile" className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md">
+          <Link 
+            to="/profile" 
+            className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md"
+            onClick={(e) => handleAuthLink(e, "/profile", "view your threads")}
+          >
             <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
               <span className="text-xl">#</span>
             </div>
             <span>Your Threads</span>
           </Link>
-          <Link to="/saved" className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md">
+          <Link 
+            to="/saved" 
+            className="flex items-center gap-3 p-2 hover:bg-gray-800 rounded-md"
+            onClick={(e) => handleAuthLink(e, "/saved", "view your saved threads")}
+          >
             <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
               <span className="text-xl">📑</span>
             </div>
@@ -86,6 +119,7 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
           <Link 
             to="/create-community" 
             className="flex items-center gap-2 p-2 bg-gray-800 rounded-md hover:bg-gray-700"
+            onClick={(e) => handleAuthLink(e, "/create-community", "create a community")}
           >
             <div className="w-8 h-8 bg-white text-black rounded-md flex items-center justify-center font-bold">
               +

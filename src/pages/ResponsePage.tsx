@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
 import { MOCK_THREADS } from "../data/mockData";
@@ -12,11 +11,26 @@ import Header from "../components/Header";
 const ResponsePage = () => {
   const { id } = useParams();
   const [response, setResponse] = useState("");
+  const navigate = useNavigate();
+  
+  // For demo purposes, we'll assume the user is not logged in
+  // In a real app, this would come from auth context
+  const isLoggedIn = false;
   
   // Find the thread by ID, fallback to the first thread if not found
   const thread = MOCK_THREADS.find(t => t.id === id) || MOCK_THREADS[0];
 
   const handleAddResponse = () => {
+    if (!isLoggedIn) {
+      toast({
+        title: "Authentication Required",
+        description: "Please login to respond to this thread",
+        variant: "destructive",
+      });
+      setTimeout(() => navigate("/login"), 1500);
+      return;
+    }
+    
     if (!response.trim()) {
       toast({
         title: "Error",
@@ -37,7 +51,7 @@ const ResponsePage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout isLoggedIn={isLoggedIn}>
       <div>
         <Header title="Thread Responses">
           <p>Join the conversation by adding your thoughts</p>

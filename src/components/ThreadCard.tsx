@@ -1,29 +1,61 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Thread } from "../types";
 import { MessageSquare, ThumbsUp, ThumbsDown, Save, Share } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 interface ThreadCardProps {
   thread: Thread;
   showResponses?: boolean;
+  isLoggedIn?: boolean;
 }
 
-const ThreadCard = ({ thread, showResponses = false }: ThreadCardProps) => {
+const ThreadCard = ({ thread, showResponses = false, isLoggedIn = false }: ThreadCardProps) => {
   const [saved, setSaved] = useState(thread.saved);
   const [likes, setLikes] = useState(thread.likes);
   const [dislikes, setDislikes] = useState(thread.dislikes);
+  const navigate = useNavigate();
+
+  const handleAuthAction = (actionName: string) => {
+    if (!isLoggedIn) {
+      toast({
+        title: "Authentication Required",
+        description: `Please login to ${actionName}`,
+        variant: "destructive",
+      });
+      setTimeout(() => navigate("/login"), 1500);
+      return false;
+    }
+    return true;
+  };
 
   const handleLike = () => {
-    setLikes(likes + 1);
+    if (handleAuthAction("like this thread")) {
+      setLikes(likes + 1);
+    }
   };
 
   const handleDislike = () => {
-    setDislikes(dislikes + 1);
+    if (handleAuthAction("dislike this thread")) {
+      setDislikes(dislikes + 1);
+    }
   };
 
   const handleSave = () => {
-    setSaved(!saved);
+    if (handleAuthAction("save this thread")) {
+      setSaved(!saved);
+    }
+  };
+
+  const handleShare = () => {
+    if (handleAuthAction("share this thread")) {
+      // Sharing functionality would go here
+      toast({
+        title: "Share",
+        description: "Sharing functionality coming soon!",
+      });
+    }
   };
 
   return (
@@ -52,11 +84,13 @@ const ThreadCard = ({ thread, showResponses = false }: ThreadCardProps) => {
       <p className="mb-4">{thread.content}</p>
       
       <div className="flex items-center gap-3">
-        <button className="rounded-md p-1">
+        <button 
+          className="rounded-md p-1"
+          onClick={handleSave}
+        >
           <Save 
             size={20} 
             className={saved ? "fill-white" : ""} 
-            onClick={handleSave}
           />
         </button>
         
@@ -83,6 +117,13 @@ const ThreadCard = ({ thread, showResponses = false }: ThreadCardProps) => {
             <ThumbsDown size={20} />
             <span>{dislikes}</span>
           </button>
+          
+          <button 
+            className="ml-2"
+            onClick={handleShare}
+          >
+            <Share size={20} />
+          </button>
         </div>
       </div>
 
@@ -103,18 +144,30 @@ const ThreadCard = ({ thread, showResponses = false }: ThreadCardProps) => {
               </div>
               <p className="ml-10">{response.content}</p>
               <div className="flex ml-10 mt-2">
-                <button className="flex items-center gap-1">
+                <button 
+                  className="flex items-center gap-1"
+                  onClick={() => handleAuthAction("like this response")}
+                >
                   <ThumbsUp size={16} />
                   <span className="text-sm">{response.likes}</span>
                 </button>
-                <button className="flex items-center gap-1 ml-2">
+                <button 
+                  className="flex items-center gap-1 ml-2"
+                  onClick={() => handleAuthAction("dislike this response")}
+                >
                   <ThumbsDown size={16} />
                   <span className="text-sm">{response.dislikes}</span>
                 </button>
-                <button className="ml-2">
+                <button 
+                  className="ml-2"
+                  onClick={() => handleAuthAction("share this response")}
+                >
                   <Share size={16} />
                 </button>
-                <button className="ml-auto">
+                <button 
+                  className="ml-auto"
+                  onClick={() => handleAuthAction("save this response")}
+                >
                   <Save size={16} />
                 </button>
               </div>
