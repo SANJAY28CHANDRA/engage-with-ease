@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { TRENDING_TOPICS, HAPPENING_NOW } from "../../data/mockData";
 import { Users, Bell, ExternalLink } from "lucide-react";
 
-const Rightbar = () => {
+interface RightbarProps {
+  isLoggedIn?: boolean;
+}
+
+const Rightbar = ({ isLoggedIn }: RightbarProps) => {
   return (
     <div className="w-80 border-l border-gray-800 flex flex-col p-4">
       <div className="mb-6">
