@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
@@ -6,26 +7,11 @@ import { Smile, Bold, Italic, List, ListOrdered, Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
 
 const ThreadsPage = () => {
   const [newPost, setNewPost] = useState("");
-  const navigate = useNavigate();
-  
-  // For demo purposes, controlling login state
-  const isLoggedIn = false;
 
   const handlePost = () => {
-    if (!isLoggedIn) {
-      toast({
-        title: "Authentication Required",
-        description: "Please login to create a post",
-        variant: "destructive",
-      });
-      setTimeout(() => navigate("/login"), 1500);
-      return;
-    }
-    
     if (!newPost.trim()) {
       toast({
         title: "Error",
@@ -44,7 +30,7 @@ const ThreadsPage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={isLoggedIn}>
+    <MainLayout isLoggedIn={true}>
       <div>
         <Header title="Threads">
           <p>Create and explore discussions with the community</p>
@@ -101,7 +87,7 @@ const ThreadsPage = () => {
         {/* Threads */}
         <div>
           {MOCK_THREADS.map((thread) => (
-            <ThreadCard key={thread.id} thread={thread} showResponses={true} isLoggedIn={isLoggedIn} />
+            <ThreadCard key={thread.id} thread={thread} showResponses={true} />
           ))}
         </div>
       </div>

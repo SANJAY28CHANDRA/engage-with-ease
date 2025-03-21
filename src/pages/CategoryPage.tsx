@@ -1,5 +1,6 @@
+
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
 import { MOCK_THREADS } from "../data/mockData";
@@ -11,11 +12,7 @@ import Header from "../components/Header";
 const CategoryPage = () => {
   const { categoryName } = useParams<{ categoryName: string }>();
   const [newPost, setNewPost] = useState("");
-  const navigate = useNavigate();
   
-  // For demo purposes, controlling login state
-  const isLoggedIn = false;
-
   // Filter threads based on category
   const categoryThreads = MOCK_THREADS.filter(
     thread => thread.category.toLowerCase() === categoryName?.toLowerCase()
@@ -27,16 +24,6 @@ const CategoryPage = () => {
     : "Category";
 
   const handlePost = () => {
-    if (!isLoggedIn) {
-      toast({
-        title: "Authentication Required",
-        description: "Please login to create a post",
-        variant: "destructive",
-      });
-      setTimeout(() => navigate("/login"), 1500);
-      return;
-    }
-    
     if (!newPost.trim()) {
       toast({
         title: "Error",
@@ -55,7 +42,7 @@ const CategoryPage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={isLoggedIn}>
+    <MainLayout isLoggedIn={true}>
       <div>
         <Header title={formattedCategoryName}>
           <p>Explore discussions related to {formattedCategoryName}</p>
@@ -113,7 +100,7 @@ const CategoryPage = () => {
         <div>
           {categoryThreads.length > 0 ? (
             categoryThreads.map((thread) => (
-              <ThreadCard key={thread.id} thread={thread} showResponses={true} isLoggedIn={isLoggedIn} />
+              <ThreadCard key={thread.id} thread={thread} showResponses={true} isLoggedIn={true} />
             ))
           ) : (
             <div className="bg-gray-800 rounded-lg p-8 text-center">

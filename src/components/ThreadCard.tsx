@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Thread } from "../types";
 import { MessageSquare, ThumbsUp, ThumbsDown, Save, Share } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
@@ -11,42 +11,28 @@ interface ThreadCardProps {
   isLoggedIn?: boolean;
 }
 
-const ThreadCard = ({ thread, showResponses = false, isLoggedIn = false }: ThreadCardProps) => {
+const ThreadCard = ({ thread, showResponses = false }: ThreadCardProps) => {
   const [saved, setSaved] = useState(thread.saved);
   const [likes, setLikes] = useState(thread.likes);
   const [dislikes, setDislikes] = useState(thread.dislikes);
-  const navigate = useNavigate();
-
-  const handleAuthAction = (actionName: string) => {
-    if (!isLoggedIn) {
-      toast({
-        title: "Authentication Required",
-        description: `Please login to ${actionName}`,
-        variant: "destructive",
-      });
-      setTimeout(() => navigate("/login"), 1500);
-      return false;
-    }
-    return true;
-  };
 
   const handleLike = () => {
-    if (!handleAuthAction("like this thread")) return;
     setLikes(likes + 1);
   };
 
   const handleDislike = () => {
-    if (!handleAuthAction("dislike this thread")) return;
     setDislikes(dislikes + 1);
   };
 
   const handleSave = () => {
-    if (!handleAuthAction("save this thread")) return;
     setSaved(!saved);
+    toast({
+      title: saved ? "Removed from saved" : "Saved successfully",
+      description: saved ? "Thread removed from your saved items" : "Thread saved to your collection",
+    });
   };
 
   const handleShare = () => {
-    if (!handleAuthAction("share this thread")) return;
     toast({
       title: "Share",
       description: "Sharing functionality coming soon!",
@@ -141,27 +127,23 @@ const ThreadCard = ({ thread, showResponses = false, isLoggedIn = false }: Threa
               <div className="flex ml-10 mt-2">
                 <button 
                   className="flex items-center gap-1"
-                  onClick={() => handleAuthAction("like this response")}
                 >
                   <ThumbsUp size={16} />
                   <span className="text-sm">{response.likes}</span>
                 </button>
                 <button 
                   className="flex items-center gap-1 ml-2"
-                  onClick={() => handleAuthAction("dislike this response")}
                 >
                   <ThumbsDown size={16} />
                   <span className="text-sm">{response.dislikes}</span>
                 </button>
                 <button 
                   className="ml-2"
-                  onClick={() => handleAuthAction("share this response")}
                 >
                   <Share size={16} />
                 </button>
                 <button 
                   className="ml-auto"
-                  onClick={() => handleAuthAction("save this response")}
                 >
                   <Save size={16} />
                 </button>

@@ -1,32 +1,11 @@
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TRENDING_TOPICS, HAPPENING_NOW } from "../../data/mockData";
 import { Users, Bell, ExternalLink } from "lucide-react";
 
-interface RightbarProps {
-  isLoggedIn: boolean;
-}
-
-const Rightbar = ({ isLoggedIn }: RightbarProps) => {
-  const navigate = useNavigate();
-
-  const handleAuthAction = () => {
-    if (isLoggedIn) {
-      navigate("/login");
-    } else {
-      navigate("/login");
-    }
-  };
-
+const Rightbar = () => {
   return (
     <div className="w-80 border-l border-gray-800 flex flex-col p-4">
-      <button 
-        onClick={handleAuthAction}
-        className="block p-4 mb-4 bg-gray-800 rounded-lg text-center hover:bg-gray-700"
-      >
-        {isLoggedIn ? "LogOut" : "Login"}
-      </button>
-
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-lg font-medium">Trending Topics</h3>

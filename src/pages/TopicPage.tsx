@@ -1,5 +1,6 @@
+
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
 import { MOCK_THREADS } from "../data/mockData";
@@ -11,31 +12,23 @@ import Header from "../components/Header";
 const TopicPage = () => {
   const { topicName } = useParams<{ topicName: string }>();
   const [newPost, setNewPost] = useState("");
-  const navigate = useNavigate();
   
-  // For demo purposes, controlling login state
-  const isLoggedIn = false;
-
   // Format topic name for display
   const formattedTopicName = topicName
     ? topicName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
     : "Topic";
 
-  // For demo purposes, we'll just show all threads
-  // In a real app, you would filter threads based on the topic
-  const topicThreads = MOCK_THREADS;
+  // Filter threads based on the topic's formatted name
+  // This now handles both Trending Topics and What's Happening
+  const topicThreads = MOCK_THREADS.filter(thread => {
+    const threadCategory = thread.category.toLowerCase();
+    const searchTopic = formattedTopicName.toLowerCase();
+    return threadCategory === searchTopic || 
+           thread.title.toLowerCase().includes(searchTopic) || 
+           thread.content.toLowerCase().includes(searchTopic);
+  });
 
   const handlePost = () => {
-    if (!isLoggedIn) {
-      toast({
-        title: "Authentication Required",
-        description: "Please login to create a post",
-        variant: "destructive",
-      });
-      setTimeout(() => navigate("/login"), 1500);
-      return;
-    }
-    
     if (!newPost.trim()) {
       toast({
         title: "Error",
@@ -54,7 +47,7 @@ const TopicPage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={isLoggedIn}>
+    <MainLayout isLoggedIn={true}>
       <div>
         <Header title={formattedTopicName}>
           <p>Join the conversation about {formattedTopicName}</p>
@@ -112,7 +105,7 @@ const TopicPage = () => {
         <div>
           {topicThreads.length > 0 ? (
             topicThreads.map((thread) => (
-              <ThreadCard key={thread.id} thread={thread} showResponses={true} isLoggedIn={isLoggedIn} />
+              <ThreadCard key={thread.id} thread={thread} showResponses={true} isLoggedIn={true} />
             ))
           ) : (
             <div className="bg-gray-800 rounded-lg p-8 text-center">
