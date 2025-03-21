@@ -14,6 +14,10 @@ import ResponsePage from "./pages/ResponsePage";
 import ProfilePage from "./pages/ProfilePage";
 import SavedPage from "./pages/SavedPage";
 import CommunityPage from "./pages/CommunityPage";
+import ContactPage from "./pages/ContactPage";
+import HelpPage from "./pages/HelpPage";
+import CategoryPage from "./pages/CategoryPage";
+import TopicPage from "./pages/TopicPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const queryClient = new QueryClient();
@@ -34,7 +38,11 @@ const App = () => (
           <Route path="/response/:id" element={<ResponsePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/saved" element={<SavedPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/help" element={<HelpPage />} />
           <Route path="/create-community" element={<CommunityPage />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
+          <Route path="/topic/:topicName" element={<TopicPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
