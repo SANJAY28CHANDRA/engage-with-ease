@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
@@ -38,8 +37,6 @@ const CategoryPage = () => {
       return;
     }
     
-    // If the user is logged in, we skip the authentication notification
-    // and only check if the post content is empty
     if (!newPost.trim()) {
       toast({
         title: "Error",

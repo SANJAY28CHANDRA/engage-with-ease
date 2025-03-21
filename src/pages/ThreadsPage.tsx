@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import MainLayout from "../components/MainLayout";
 import ThreadCard from "../components/ThreadCard";
@@ -27,8 +26,6 @@ const ThreadsPage = () => {
       return;
     }
     
-    // If the user is logged in, we skip the authentication notification
-    // and only check if the post content is empty
     if (!newPost.trim()) {
       toast({
         title: "Error",
@@ -43,8 +40,6 @@ const ThreadsPage = () => {
       description: "Your post has been created!",
     });
 
-    // In a real app, we would add the post to the database
-    // For demo purposes, we'll just clear the input
     setNewPost("");
   };
 
