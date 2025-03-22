@@ -1,10 +1,14 @@
 
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, LogIn } from "lucide-react";
+import { Search, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const Topbar = () => {
+interface TopbarProps {
+  isLoggedIn?: boolean;
+}
+
+const Topbar = ({ isLoggedIn = false }: TopbarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,6 +23,13 @@ const Topbar = () => {
 
   const handleLoginClick = () => {
     navigate("/login");
+  };
+
+  const handleLogoutClick = () => {
+    // In a real app, you would handle the logout logic here
+    // For demo purposes, we'll just navigate to the home page
+    navigate("/");
+    // You might want to display a toast message here
   };
 
   return (
@@ -55,13 +66,23 @@ const Topbar = () => {
           </nav>
         </div>
         
-        <Button 
-          className="ml-4 bg-purple-400 hover:bg-purple-500 flex items-center gap-2"
-          onClick={handleLoginClick}
-        >
-          <LogIn size={18} />
-          Login
-        </Button>
+        {isLoggedIn ? (
+          <Button 
+            className="ml-4 bg-purple-400 hover:bg-purple-500 flex items-center gap-2"
+            onClick={handleLogoutClick}
+          >
+            <LogOut size={18} />
+            Logout
+          </Button>
+        ) : (
+          <Button 
+            className="ml-4 bg-purple-400 hover:bg-purple-500 flex items-center gap-2"
+            onClick={handleLoginClick}
+          >
+            <LogIn size={18} />
+            Login
+          </Button>
+        )}
       </div>
     </div>
   );

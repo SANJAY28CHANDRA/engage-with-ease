@@ -16,7 +16,7 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
 
       <div className="flex-1 flex">
         <div className="flex-1 max-w-4xl">
-          <Topbar />
+          <Topbar isLoggedIn={isLoggedIn} />
 
           <div className="p-6">
             {children}
