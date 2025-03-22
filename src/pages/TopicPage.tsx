@@ -8,6 +8,7 @@ import { Smile, Bold, Italic, List, ListOrdered, Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
+import { Thread } from "../types";
 
 const TopicPage = () => {
   const { topicName } = useParams<{ topicName: string }>();
@@ -20,13 +21,17 @@ const TopicPage = () => {
 
   // Filter threads based on the topic's formatted name
   // This now handles both Trending Topics and What's Happening
-  const topicThreads = MOCK_THREADS.filter(thread => {
-    const threadCategory = thread.category.toLowerCase();
-    const searchTopic = formattedTopicName.toLowerCase();
-    return threadCategory === searchTopic || 
-           thread.title.toLowerCase().includes(searchTopic) || 
-           thread.content.toLowerCase().includes(searchTopic);
-  });
+  const filterThreads = () => {
+    return MOCK_THREADS.filter(thread => {
+      const threadCategory = thread.category.toLowerCase();
+      const searchTopic = formattedTopicName.toLowerCase();
+      return threadCategory === searchTopic || 
+            thread.title.toLowerCase().includes(searchTopic) || 
+            thread.content.toLowerCase().includes(searchTopic);
+    });
+  };
+
+  const [topicThreads, setTopicThreads] = useState(filterThreads());
 
   const handlePost = () => {
     if (!newPost.trim()) {
@@ -38,6 +43,30 @@ const TopicPage = () => {
       return;
     }
 
+    // Create new thread with the post content
+    const newThread: Thread = {
+      id: `thread-${Date.now()}`,
+      title: `${formattedTopicName} Discussion`,
+      content: newPost,
+      author: {
+        id: "current-user",
+        name: "Current User",
+        email: "user@example.com",
+        image: "/lovable-uploads/9b84da61-785c-4105-bd90-8e7a6fbcd21f.png",
+        role: "Member",
+        bio: "I am a member of this community"
+      },
+      createdAt: "Just now",
+      category: formattedTopicName,
+      likes: 0,
+      dislikes: 0,
+      responses: [],
+      saved: false
+    };
+
+    // Add the new thread to the top of the threads list
+    setTopicThreads([newThread, ...topicThreads]);
+
     toast({
       title: "Success",
       description: "Your post has been created!",
@@ -47,7 +76,7 @@ const TopicPage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout>
       <div>
         <Header title={formattedTopicName}>
           <p>Join the conversation about {formattedTopicName}</p>
@@ -105,7 +134,7 @@ const TopicPage = () => {
         <div>
           {topicThreads.length > 0 ? (
             topicThreads.map((thread) => (
-              <ThreadCard key={thread.id} thread={thread} showResponses={true} isLoggedIn={true} />
+              <ThreadCard key={thread.id} thread={thread} showResponses={true} />
             ))
           ) : (
             <div className="bg-gray-800 rounded-lg p-8 text-center">

@@ -6,13 +6,12 @@ import Rightbar from "./layout/Rightbar";
 
 interface MainLayoutProps {
   children: ReactNode;
-  isLoggedIn?: boolean;
 }
 
-const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
+const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="flex min-h-screen bg-[#1A1F2C] text-white font-sans">
-      <Sidebar isLoggedIn={isLoggedIn} />
+      <Sidebar />
 
       <div className="flex-1 flex">
         <div className="flex-1 max-w-4xl">
@@ -23,7 +22,7 @@ const MainLayout = ({ children, isLoggedIn = false }: MainLayoutProps) => {
           </div>
         </div>
 
-        <Rightbar isLoggedIn={isLoggedIn} />
+        <Rightbar />
       </div>
     </div>
   );

@@ -8,20 +8,23 @@ import { Smile, Bold, Italic, List, ListOrdered, Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
+import { Thread } from "../types";
 
 const CategoryPage = () => {
   const { categoryName } = useParams<{ categoryName: string }>();
   const [newPost, setNewPost] = useState("");
   
-  // Filter threads based on category
-  const categoryThreads = MOCK_THREADS.filter(
-    thread => thread.category.toLowerCase() === categoryName?.toLowerCase()
-  );
-  
   // Format category name for display
   const formattedCategoryName = categoryName
     ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
     : "Category";
+
+  // Filter threads based on category
+  const filteredThreads = MOCK_THREADS.filter(
+    thread => thread.category.toLowerCase() === categoryName?.toLowerCase()
+  );
+  
+  const [categoryThreads, setCategoryThreads] = useState(filteredThreads);
 
   const handlePost = () => {
     if (!newPost.trim()) {
@@ -33,6 +36,30 @@ const CategoryPage = () => {
       return;
     }
 
+    // Create new thread with the post content
+    const newThread: Thread = {
+      id: `thread-${Date.now()}`,
+      title: `${formattedCategoryName} Discussion`,
+      content: newPost,
+      author: {
+        id: "current-user",
+        name: "Current User",
+        email: "user@example.com",
+        image: "/lovable-uploads/9b84da61-785c-4105-bd90-8e7a6fbcd21f.png",
+        role: "Member",
+        bio: "I am a member of this community"
+      },
+      createdAt: "Just now",
+      category: formattedCategoryName,
+      likes: 0,
+      dislikes: 0,
+      responses: [],
+      saved: false
+    };
+
+    // Add the new thread to the top of the threads list
+    setCategoryThreads([newThread, ...categoryThreads]);
+
     toast({
       title: "Success",
       description: "Your post has been created!",
@@ -42,7 +69,7 @@ const CategoryPage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout>
       <div>
         <Header title={formattedCategoryName}>
           <p>Explore discussions related to {formattedCategoryName}</p>
@@ -100,7 +127,7 @@ const CategoryPage = () => {
         <div>
           {categoryThreads.length > 0 ? (
             categoryThreads.map((thread) => (
-              <ThreadCard key={thread.id} thread={thread} showResponses={true} isLoggedIn={true} />
+              <ThreadCard key={thread.id} thread={thread} showResponses={true} />
             ))
           ) : (
             <div className="bg-gray-800 rounded-lg p-8 text-center">

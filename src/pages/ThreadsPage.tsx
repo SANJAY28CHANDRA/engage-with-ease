@@ -7,9 +7,11 @@ import { Smile, Bold, Italic, List, ListOrdered, Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
+import { Thread } from "../types";
 
 const ThreadsPage = () => {
   const [newPost, setNewPost] = useState("");
+  const [threads, setThreads] = useState(MOCK_THREADS);
 
   const handlePost = () => {
     if (!newPost.trim()) {
@@ -21,6 +23,30 @@ const ThreadsPage = () => {
       return;
     }
 
+    // Create new thread with the post content
+    const newThread: Thread = {
+      id: `thread-${Date.now()}`,
+      title: `New thread ${new Date().toLocaleDateString()}`,
+      content: newPost,
+      author: {
+        id: "current-user",
+        name: "Current User",
+        email: "user@example.com",
+        image: "/lovable-uploads/9b84da61-785c-4105-bd90-8e7a6fbcd21f.png",
+        role: "Member",
+        bio: "I am a member of this community"
+      },
+      createdAt: "Just now",
+      category: "Discussion",
+      likes: 0,
+      dislikes: 0,
+      responses: [],
+      saved: false
+    };
+
+    // Add the new thread to the top of the threads list
+    setThreads([newThread, ...threads]);
+
     toast({
       title: "Success",
       description: "Your post has been created!",
@@ -30,7 +56,7 @@ const ThreadsPage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout>
       <div>
         <Header title="Threads">
           <p>Create and explore discussions with the community</p>
@@ -86,7 +112,7 @@ const ThreadsPage = () => {
         
         {/* Threads */}
         <div>
-          {MOCK_THREADS.map((thread) => (
+          {threads.map((thread) => (
             <ThreadCard key={thread.id} thread={thread} showResponses={true} />
           ))}
         </div>
