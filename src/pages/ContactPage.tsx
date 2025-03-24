@@ -41,7 +41,7 @@ const ContactPage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={isLoggedIn}>
+    <MainLayout initialIsLoggedIn={isLoggedIn}>
       <div>
         <Header title="Contact Us">
           <p>Get in touch with our team</p>

@@ -17,7 +17,7 @@ const HelpPage = () => {
   const [isLoggedIn] = useState(false);
 
   return (
-    <MainLayout isLoggedIn={isLoggedIn}>
+    <MainLayout initialIsLoggedIn={isLoggedIn}>
       <div>
         <Header title="Help & Support">
           <p>Find answers to your questions and get assistance</p>

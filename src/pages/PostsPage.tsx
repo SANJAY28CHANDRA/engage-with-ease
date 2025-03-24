@@ -7,7 +7,7 @@ import Header from "../components/Header";
 
 const PostsPage = () => {
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout initialIsLoggedIn={true}>
       <div>
         <Header title="Posts">
           <p>Browse all posts from the community</p>

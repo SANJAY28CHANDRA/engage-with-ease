@@ -10,7 +10,7 @@ const SavedPage = () => {
   const savedThreads = MOCK_THREADS.filter(thread => thread.saved);
   
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout initialIsLoggedIn={true}>
       <div>
         <Header title="Saved Threads">
           <p>Access your bookmarked threads for easy reference</p>

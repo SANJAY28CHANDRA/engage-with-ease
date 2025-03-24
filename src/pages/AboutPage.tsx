@@ -1,9 +1,10 @@
+
 import MainLayout from "../components/MainLayout";
 import Header from "../components/Header";
 
 const AboutPage = () => {
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout initialIsLoggedIn={true}>
       <Header title="About ConnectForum">
         <p>Learn about our platform and community guidelines</p>
       </Header>

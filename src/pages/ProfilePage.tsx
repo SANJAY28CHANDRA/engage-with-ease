@@ -10,7 +10,7 @@ const ProfilePage = () => {
   const userThreads = MOCK_THREADS.filter(thread => thread.author.id === MOCK_USER.id);
   
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout initialIsLoggedIn={true}>
       <div>
         <Header title="My Profile">
           <p>Manage your profile and view your contributions</p>

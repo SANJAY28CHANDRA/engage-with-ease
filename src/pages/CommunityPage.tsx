@@ -31,7 +31,7 @@ const CommunityPage = () => {
   };
 
   return (
-    <MainLayout isLoggedIn={true}>
+    <MainLayout initialIsLoggedIn={true}>
       <div className="max-w-2xl mx-auto">
         <Header title="Communities">
           <p>Join existing communities or create your own</p>
