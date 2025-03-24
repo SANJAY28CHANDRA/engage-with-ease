@@ -1,0 +1,139 @@
+
+.search-container {
+  position: relative;
+  max-width: 36rem;
+  margin: 1.5rem auto 2rem auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(156, 163, 175);
+}
+
+.search-input {
+  background-color: rgb(31, 41, 55);
+  border: 1px solid rgb(55, 65, 81);
+  padding-left: 2.5rem;
+}
+
+.help-categories {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .help-categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.category-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  height: auto;
+  padding: 1.5rem;
+  background-color: rgb(31, 41, 55);
+  border: 1px solid rgb(55, 65, 81);
+}
+
+.category-button:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.category-icon {
+  color: rgb(167, 139, 250);
+}
+
+.category-title {
+  font-weight: 500;
+}
+
+.category-subtitle {
+  font-size: 0.75rem;
+  color: rgb(156, 163, 175);
+}
+
+.help-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .help-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.faq-item {
+  background-color: rgb(31, 41, 55);
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.help-category-button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(31, 41, 55);
+  border: 1px solid rgb(55, 65, 81);
+}
+
+.help-category-button:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.help-category-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.help-category-icon {
+  color: rgb(167, 139, 250);
+}
+
+.help-category-arrow {
+  color: rgb(156, 163, 175);
+}
+
+.support-card {
+  margin-top: 2rem;
+  background-color: rgb(31, 41, 55);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.support-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.support-text {
+  color: rgb(209, 213, 219);
+  margin-bottom: 1rem;
+}
+
+.support-button {
+  background-color: rgb(167, 139, 250);
+}
+
+.support-button:hover {
+  background-color: rgb(139, 92, 246);
+}

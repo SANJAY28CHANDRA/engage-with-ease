@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import Header from "../components/Header";
 import { Thread } from "../types";
+import "./CategoryPage.css";
 
 const CategoryPage = () => {
   const { categoryName } = useParams<{ categoryName: string }>();
@@ -76,46 +77,46 @@ const CategoryPage = () => {
         </Header>
 
         {/* Create Post Area */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-3">
+        <div className="create-post-area">
+          <div className="create-post-header">
             <img 
               src="/lovable-uploads/9b84da61-785c-4105-bd90-8e7a6fbcd21f.png" 
               alt="User avatar" 
-              className="w-10 h-10 rounded-md"
+              className="user-avatar"
             />
             <textarea
               placeholder={`What's on your mind about ${formattedCategoryName}?`}
               value={newPost}
               onChange={(e) => setNewPost(e.target.value)}
-              className="flex-1 bg-gray-800 border border-gray-700 rounded-md p-2 resize-none focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="post-textarea"
               rows={1}
             />
           </div>
           
-          <div className="flex justify-between items-center">
-            <div className="flex gap-3">
-              <button className="text-gray-400 hover:text-white">
+          <div className="post-actions">
+            <div className="formatting-buttons">
+              <button className="format-button">
                 <Smile size={20} />
               </button>
-              <button className="text-gray-400 hover:text-white">
+              <button className="format-button">
                 <Bold size={20} />
               </button>
-              <button className="text-gray-400 hover:text-white">
+              <button className="format-button">
                 <Italic size={20} />
               </button>
-              <button className="text-gray-400 hover:text-white">
+              <button className="format-button">
                 <List size={20} />
               </button>
-              <button className="text-gray-400 hover:text-white">
+              <button className="format-button">
                 <ListOrdered size={20} />
               </button>
-              <button className="text-gray-400 hover:text-white">
+              <button className="format-button">
                 <Link2 size={20} />
               </button>
             </div>
             
             <Button 
-              className="bg-purple-400 hover:bg-purple-500 px-6"
+              className="post-button"
               onClick={handlePost}
             >
               POST
@@ -130,9 +131,9 @@ const CategoryPage = () => {
               <ThreadCard key={thread.id} thread={thread} showResponses={true} />
             ))
           ) : (
-            <div className="bg-gray-800 rounded-lg p-8 text-center">
-              <h3 className="text-xl font-bold mb-2">No discussions yet</h3>
-              <p className="text-gray-400">Be the first to start a discussion in this category!</p>
+            <div className="empty-state">
+              <h3 className="empty-state-title">No discussions yet</h3>
+              <p className="empty-state-text">Be the first to start a discussion in this category!</p>
             </div>
           )}
         </div>

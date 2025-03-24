@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
+import "./ContactPage.css";
 
 const ContactPage = () => {
   const [name, setName] = useState("");
@@ -47,25 +48,25 @@ const ContactPage = () => {
           <p>Get in touch with our team</p>
         </Header>
 
-        <div className="grid md:grid-cols-2 gap-8 mt-8">
+        <div className="contact-grid">
           <div>
-            <h2 className="text-xl font-bold mb-4">Send us a message</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-1">
+            <h2 className="form-section-title">Send us a message</h2>
+            <form onSubmit={handleSubmit} className="contact-space">
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">
                   Name *
                 </label>
                 <Input
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="bg-gray-800 border-gray-700"
+                  className="form-input"
                   placeholder="Your name"
                 />
               </div>
               
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1">
+              <div className="form-group">
+                <label htmlFor="email" className="form-label">
                   Email *
                 </label>
                 <Input
@@ -73,84 +74,84 @@ const ContactPage = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-gray-800 border-gray-700"
+                  className="form-input"
                   placeholder="Your email"
                 />
               </div>
               
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium mb-1">
+              <div className="form-group">
+                <label htmlFor="subject" className="form-label">
                   Subject
                 </label>
                 <Input
                   id="subject"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="bg-gray-800 border-gray-700"
+                  className="form-input"
                   placeholder="Subject of your message"
                 />
               </div>
               
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-1">
+              <div className="form-group">
+                <label htmlFor="message" className="form-label">
                   Message *
                 </label>
                 <Textarea
                   id="message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="bg-gray-800 border-gray-700"
+                  className="form-textarea"
                   placeholder="Your message"
                   rows={4}
                 />
               </div>
               
-              <Button type="submit" className="bg-purple-400 hover:bg-purple-500 w-full">
+              <Button type="submit" className="form-submit">
                 Send Message
               </Button>
             </form>
           </div>
           
-          <div className="space-y-6">
-            <h2 className="text-xl font-bold mb-4">Contact Information</h2>
+          <div className="contact-space">
+            <h2 className="contact-section-title">Contact Information</h2>
             
-            <div className="bg-gray-800 p-4 rounded-lg flex gap-4">
-              <div className="bg-purple-400 bg-opacity-20 p-2 rounded">
-                <Mail className="text-purple-400" />
+            <div className="contact-card">
+              <div className="contact-icon-container">
+                <Mail className="contact-icon" />
               </div>
               <div>
-                <h3 className="font-medium">Email</h3>
-                <p className="text-gray-400">support@connectforum.io</p>
-                <p className="text-gray-400">info@connectforum.io</p>
+                <h3 className="contact-info-title">Email</h3>
+                <p className="contact-info-text">support@connectforum.io</p>
+                <p className="contact-info-text">info@connectforum.io</p>
               </div>
             </div>
             
-            <div className="bg-gray-800 p-4 rounded-lg flex gap-4">
-              <div className="bg-purple-400 bg-opacity-20 p-2 rounded">
-                <Phone className="text-purple-400" />
+            <div className="contact-card">
+              <div className="contact-icon-container">
+                <Phone className="contact-icon" />
               </div>
               <div>
-                <h3 className="font-medium">Phone</h3>
-                <p className="text-gray-400">+1 (555) 123-4567</p>
-                <p className="text-gray-400">+1 (555) 987-6543</p>
+                <h3 className="contact-info-title">Phone</h3>
+                <p className="contact-info-text">+1 (555) 123-4567</p>
+                <p className="contact-info-text">+1 (555) 987-6543</p>
               </div>
             </div>
             
-            <div className="bg-gray-800 p-4 rounded-lg flex gap-4">
-              <div className="bg-purple-400 bg-opacity-20 p-2 rounded">
-                <MapPin className="text-purple-400" />
+            <div className="contact-card">
+              <div className="contact-icon-container">
+                <MapPin className="contact-icon" />
               </div>
               <div>
-                <h3 className="font-medium">Address</h3>
-                <p className="text-gray-400">123 Forum Street</p>
-                <p className="text-gray-400">Tech City, TC 10101</p>
+                <h3 className="contact-info-title">Address</h3>
+                <p className="contact-info-text">123 Forum Street</p>
+                <p className="contact-info-text">Tech City, TC 10101</p>
               </div>
             </div>
             
-            <div className="mt-6">
-              <h3 className="font-medium mb-2">Business Hours</h3>
-              <p className="text-gray-400">Monday - Friday: 9am - 5pm</p>
-              <p className="text-gray-400">Saturday - Sunday: Closed</p>
+            <div className="hours-section">
+              <h3 className="hours-title">Business Hours</h3>
+              <p className="hours-text">Monday - Friday: 9am - 5pm</p>
+              <p className="hours-text">Saturday - Sunday: Closed</p>
             </div>
           </div>
         </div>

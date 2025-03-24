@@ -1,0 +1,99 @@
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.form-input {
+  background-color: rgb(31, 41, 55);
+  border: 1px solid rgb(55, 65, 81);
+}
+
+.form-textarea {
+  background-color: rgb(31, 41, 55);
+  border: 1px solid rgb(55, 65, 81);
+}
+
+.form-submit {
+  background-color: rgb(167, 139, 250);
+  width: 100%;
+}
+
+.form-submit:hover {
+  background-color: rgb(139, 92, 246);
+}
+
+.contact-space {
+  margin-top: 1.5rem;
+}
+
+.contact-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.contact-card {
+  background-color: rgb(31, 41, 55);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-icon-container {
+  background-color: rgba(167, 139, 250, 0.2);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.contact-icon {
+  color: rgb(167, 139, 250);
+}
+
+.contact-info-title {
+  font-weight: 500;
+}
+
+.contact-info-text {
+  color: rgb(156, 163, 175);
+}
+
+.hours-section {
+  margin-top: 1.5rem;
+}
+
+.hours-title {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.hours-text {
+  color: rgb(156, 163, 175);
+}

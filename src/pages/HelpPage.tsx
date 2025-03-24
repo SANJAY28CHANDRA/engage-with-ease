@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import "./HelpPage.css";
 
 const HelpPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,42 +24,42 @@ const HelpPage = () => {
           <p>Find answers to your questions and get assistance</p>
         </Header>
 
-        <div className="relative max-w-xl mx-auto mt-6 mb-8">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+        <div className="search-container">
+          <Search className="search-icon" size={20} />
           <Input
             type="text"
             placeholder="Search for help topics..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-gray-800 border-gray-700 pl-10"
+            className="search-input"
           />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <Button variant="outline" className="flex flex-col items-center gap-2 h-auto p-6 bg-gray-800 hover:bg-gray-700 border-gray-700">
-            <Book size={24} className="text-purple-400" />
-            <span className="font-medium">User Guides</span>
-            <span className="text-xs text-gray-400">How to use the platform</span>
+        <div className="help-categories">
+          <Button variant="outline" className="category-button">
+            <Book size={24} className="category-icon" />
+            <span className="category-title">User Guides</span>
+            <span className="category-subtitle">How to use the platform</span>
           </Button>
           
-          <Button variant="outline" className="flex flex-col items-center gap-2 h-auto p-6 bg-gray-800 hover:bg-gray-700 border-gray-700">
-            <MessageSquare size={24} className="text-purple-400" />
-            <span className="font-medium">Community Forum</span>
-            <span className="text-xs text-gray-400">Ask the community</span>
+          <Button variant="outline" className="category-button">
+            <MessageSquare size={24} className="category-icon" />
+            <span className="category-title">Community Forum</span>
+            <span className="category-subtitle">Ask the community</span>
           </Button>
           
-          <Button variant="outline" className="flex flex-col items-center gap-2 h-auto p-6 bg-gray-800 hover:bg-gray-700 border-gray-700">
-            <HelpCircle size={24} className="text-purple-400" />
-            <span className="font-medium">FAQ</span>
-            <span className="text-xs text-gray-400">Frequently asked questions</span>
+          <Button variant="outline" className="category-button">
+            <HelpCircle size={24} className="category-icon" />
+            <span className="category-title">FAQ</span>
+            <span className="category-subtitle">Frequently asked questions</span>
           </Button>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="help-content">
           <div>
-            <h2 className="text-xl font-bold mb-4">Frequently Asked Questions</h2>
-            <Accordion type="single" collapsible className="space-y-2">
-              <AccordionItem value="item-1" className="bg-gray-800 rounded-lg px-4">
+            <h2 className="section-title">Frequently Asked Questions</h2>
+            <Accordion type="single" collapsible className="contact-space">
+              <AccordionItem value="item-1" className="faq-item">
                 <AccordionTrigger className="text-left py-4">How do I create an account?</AccordionTrigger>
                 <AccordionContent className="pb-4 text-gray-300">
                   To create an account, click on the "Login" button at the top of the page, 
@@ -66,7 +67,7 @@ const HelpPage = () => {
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-2" className="bg-gray-800 rounded-lg px-4">
+              <AccordionItem value="item-2" className="faq-item">
                 <AccordionTrigger className="text-left py-4">How do I create a thread?</AccordionTrigger>
                 <AccordionContent className="pb-4 text-gray-300">
                   To create a thread, navigate to the Threads page and use the post creation area at the top. 
@@ -74,7 +75,7 @@ const HelpPage = () => {
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-3" className="bg-gray-800 rounded-lg px-4">
+              <AccordionItem value="item-3" className="faq-item">
                 <AccordionTrigger className="text-left py-4">How do I save a thread?</AccordionTrigger>
                 <AccordionContent className="pb-4 text-gray-300">
                   To save a thread, click the save icon (bookmark) on the thread you want to save. 
@@ -82,7 +83,7 @@ const HelpPage = () => {
                 </AccordionContent>
               </AccordionItem>
               
-              <AccordionItem value="item-4" className="bg-gray-800 rounded-lg px-4">
+              <AccordionItem value="item-4" className="faq-item">
                 <AccordionTrigger className="text-left py-4">How do I create a community?</AccordionTrigger>
                 <AccordionContent className="pb-4 text-gray-300">
                   To create a community, click on the "Create Community" button in the sidebar. 
@@ -93,39 +94,39 @@ const HelpPage = () => {
           </div>
           
           <div>
-            <h2 className="text-xl font-bold mb-4">Get Help By Category</h2>
-            <div className="space-y-4">
-              <Button variant="outline" className="flex justify-between w-full p-4 bg-gray-800 hover:bg-gray-700 border-gray-700">
-                <div className="flex items-center gap-3">
-                  <User size={20} className="text-purple-400" />
+            <h2 className="section-title">Get Help By Category</h2>
+            <div className="contact-space">
+              <Button variant="outline" className="help-category-button">
+                <div className="help-category-icon-container">
+                  <User size={20} className="help-category-icon" />
                   <span>Account & Profile</span>
                 </div>
-                <span className="text-gray-400">→</span>
+                <span className="help-category-arrow">→</span>
               </Button>
               
-              <Button variant="outline" className="flex justify-between w-full p-4 bg-gray-800 hover:bg-gray-700 border-gray-700">
-                <div className="flex items-center gap-3">
-                  <MessageSquare size={20} className="text-purple-400" />
+              <Button variant="outline" className="help-category-button">
+                <div className="help-category-icon-container">
+                  <MessageSquare size={20} className="help-category-icon" />
                   <span>Threads & Responses</span>
                 </div>
-                <span className="text-gray-400">→</span>
+                <span className="help-category-arrow">→</span>
               </Button>
               
-              <Button variant="outline" className="flex justify-between w-full p-4 bg-gray-800 hover:bg-gray-700 border-gray-700">
-                <div className="flex items-center gap-3">
-                  <Settings size={20} className="text-purple-400" />
+              <Button variant="outline" className="help-category-button">
+                <div className="help-category-icon-container">
+                  <Settings size={20} className="help-category-icon" />
                   <span>Settings & Preferences</span>
                 </div>
-                <span className="text-gray-400">→</span>
+                <span className="help-category-arrow">→</span>
               </Button>
             </div>
             
-            <div className="mt-8 bg-gray-800 p-6 rounded-lg">
-              <h3 className="font-bold text-lg mb-2">Still need help?</h3>
-              <p className="text-gray-300 mb-4">
+            <div className="support-card">
+              <h3 className="support-title">Still need help?</h3>
+              <p className="support-text">
                 If you couldn't find what you were looking for, please contact our support team.
               </p>
-              <Button className="bg-purple-400 hover:bg-purple-500">
+              <Button className="support-button">
                 Contact Support
               </Button>
             </div>

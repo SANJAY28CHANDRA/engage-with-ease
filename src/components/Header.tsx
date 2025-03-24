@@ -1,5 +1,6 @@
 
 import { ReactNode } from "react";
+import "./Header.css";
 
 interface HeaderProps {
   title: string;
@@ -8,9 +9,9 @@ interface HeaderProps {
 
 const Header = ({ title, children }: HeaderProps) => {
   return (
-    <div className="mb-6 pb-4 border-b border-gray-700">
-      <h1 className="text-3xl font-bold mb-2">{title}</h1>
-      {children && <div className="text-gray-400">{children}</div>}
+    <div className="header-container">
+      <h1 className="header-title">{title}</h1>
+      {children && <div className="header-subtitle">{children}</div>}
     </div>
   );
 };

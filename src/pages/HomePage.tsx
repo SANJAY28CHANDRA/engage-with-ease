@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
 import Header from "../components/Header";
+import "./HomePage.css";
 
 const HomePage = () => {
   return (
@@ -10,18 +11,18 @@ const HomePage = () => {
         <p>Discussion with anyone, You can say anything #FreeSpeech.</p>
       </Header>
 
-      <div className="flex flex-col items-center text-center">
-        <div className="w-full max-w-2xl mb-8">
+      <div className="flex-center">
+        <div className="home-image-container">
           <img 
             src="/lovable-uploads/d088fa3e-bfb2-414c-88e5-44febc41c6a0.png" 
             alt="Community discussion" 
-            className="w-full rounded-xl"
+            className="home-image"
           />
         </div>
         
         <Link 
           to="/threads"
-          className="bg-purple-200 text-purple-800 px-6 py-3 rounded-md font-medium hover:bg-purple-300 transition-colors"
+          className="threads-link"
         >
           Go to #Threads
         </Link>
