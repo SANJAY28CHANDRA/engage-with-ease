@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { TRENDING_TOPICS, HAPPENING_NOW } from "../../data/mockData";
 import { Users, Bell, ExternalLink } from "lucide-react";
+import "./Rightbar.css";
 
 interface RightbarProps {
   isLoggedIn?: boolean;
@@ -9,47 +10,47 @@ interface RightbarProps {
 
 const Rightbar = ({ isLoggedIn }: RightbarProps) => {
   return (
-    <div className="w-80 border-l border-gray-800 flex flex-col p-4">
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-medium">Trending Topics</h3>
+    <div className="rightbar">
+      <div className="rightbar-section">
+        <div className="section-header">
+          <h3 className="section-title">Trending Topics</h3>
           <Users size={18} />
         </div>
-        <div className="space-y-2">
+        <div className="topic-list">
           {TRENDING_TOPICS.map((topic) => (
             <Link 
               key={topic.name} 
               to={`/topic/${topic.name.toLowerCase().replace(/\s+/g, '-')}`}
-              className="flex items-center gap-2 p-2 hover:bg-gray-800 rounded-md group"
+              className="topic-item"
             >
-              <div className="w-8 h-8 bg-green-300 rounded-full"></div>
-              <span className="text-sm flex-1">{topic.name}</span>
-              <ExternalLink size={14} className="text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="topic-avatar"></div>
+              <span className="topic-name">{topic.name}</span>
+              <ExternalLink size={14} className="topic-icon" />
             </Link>
           ))}
-          <button className="text-sm text-gray-400 hover:text-white ml-2">see more</button>
+          <button className="more-link">see more</button>
         </div>
       </div>
 
-      <div>
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-medium">Whats Happenning?</h3>
+      <div className="rightbar-section">
+        <div className="section-header">
+          <h3 className="section-title">Whats Happenning?</h3>
           <Bell size={18} />
         </div>
-        <div className="space-y-2">
+        <div className="topic-list">
           {HAPPENING_NOW.map((topic) => (
             <Link 
               key={topic} 
               to={`/topic/${topic.toLowerCase().replace(/\s+/g, '-').replace('-', '')}`}
-              className="flex items-center justify-between p-2 hover:bg-gray-800 rounded-md group"
+              className="happening-item"
             >
-              <div className="flex items-center gap-2">
-                <span className="text-gray-400 text-xl">#</span>
-                <span className="text-sm">{topic}</span>
+              <div className="happening-content">
+                <span className="hashtag">#</span>
+                <span className="happening-title">{topic}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-400">6h ago</span>
-                <ExternalLink size={14} className="text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="happening-meta">
+                <span className="happening-time">6h ago</span>
+                <ExternalLink size={14} className="happening-icon" />
               </div>
             </Link>
           ))}

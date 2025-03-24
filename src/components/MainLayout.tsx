@@ -3,6 +3,7 @@ import { ReactNode, useState } from "react";
 import Sidebar from "./layout/Sidebar";
 import Topbar from "./layout/Topbar";
 import Rightbar from "./layout/Rightbar";
+import "./MainLayout.css";
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -17,14 +18,14 @@ const MainLayout = ({ children, initialIsLoggedIn = false }: MainLayoutProps) =>
   };
 
   return (
-    <div className="flex min-h-screen bg-[#1A1F2C] text-white font-sans">
+    <div className="main-layout">
       <Sidebar isLoggedIn={isLoggedIn} />
 
-      <div className="flex-1 flex">
-        <div className="flex-1 max-w-4xl">
+      <div className="main-content">
+        <div className="content-container">
           <Topbar isLoggedIn={isLoggedIn} onLoginStatusChange={handleLoginStatus} />
 
-          <div className="p-6">
+          <div className="page-content">
             {children}
           </div>
         </div>
