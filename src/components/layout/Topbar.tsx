@@ -24,13 +24,7 @@ const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
   ];
 
   const handleLoginClick = () => {
-    if (onLoginStatusChange) {
-      onLoginStatusChange(true);
-    }
-    toast({
-      title: "Success",
-      description: "You are now logged in",
-    });
+    navigate("/login");
   };
 
   const handleLogoutClick = () => {
