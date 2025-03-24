@@ -3,12 +3,14 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 
 interface TopbarProps {
   isLoggedIn?: boolean;
+  onLoginStatusChange?: (status: boolean) => void;
 }
 
-const Topbar = ({ isLoggedIn = false }: TopbarProps) => {
+const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,14 +24,23 @@ const Topbar = ({ isLoggedIn = false }: TopbarProps) => {
   ];
 
   const handleLoginClick = () => {
-    navigate("/login");
+    if (onLoginStatusChange) {
+      onLoginStatusChange(true);
+    }
+    toast({
+      title: "Success",
+      description: "You are now logged in",
+    });
   };
 
   const handleLogoutClick = () => {
-    // In a real app, you would handle the logout logic here
-    // For demo purposes, we'll just navigate to the home page
-    navigate("/");
-    // You might want to display a toast message here
+    if (onLoginStatusChange) {
+      onLoginStatusChange(false);
+    }
+    toast({
+      title: "Success",
+      description: "You have been logged out",
+    });
   };
 
   return (
