@@ -1,7 +1,7 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, LogIn, LogOut } from "lucide-react";
+import { Search, LogIn, LogOut, User } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import "./Topbar.css";
 
@@ -12,8 +12,20 @@ interface TopbarProps {
 
 const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [user, setUser] = useState<any>(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in on component mount
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      if (onLoginStatusChange) {
+        onLoginStatusChange(true);
+      }
+    }
+  }, [onLoginStatusChange]);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -28,13 +40,25 @@ const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
   };
 
   const handleLogoutClick = () => {
+    // Clear user data and token from localStorage
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    setUser(null);
+    
     if (onLoginStatusChange) {
       onLoginStatusChange(false);
     }
+    
     toast({
       title: "Success",
       description: "You have been logged out",
     });
+    
+    navigate("/");
+  };
+
+  const handleProfileClick = () => {
+    navigate("/profile");
   };
 
   return (
@@ -69,14 +93,23 @@ const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
           </nav>
         </div>
         
-        {isLoggedIn ? (
-          <button 
-            className="auth-button"
-            onClick={handleLogoutClick}
-          >
-            <LogOut size={18} />
-            Logout
-          </button>
+        {user ? (
+          <div className="auth-buttons">
+            <button 
+              className="profile-button"
+              onClick={handleProfileClick}
+            >
+              <User size={18} />
+              {user.name}
+            </button>
+            <button 
+              className="auth-button"
+              onClick={handleLogoutClick}
+            >
+              <LogOut size={18} />
+              Logout
+            </button>
+          </div>
         ) : (
           <button 
             className="auth-button"

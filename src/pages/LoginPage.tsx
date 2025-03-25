@@ -5,15 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { loginUser } from "@/services/api";
 import "./LoginPage.css";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Simple validation
@@ -26,14 +28,36 @@ const LoginPage = () => {
       return;
     }
 
-    // In a real app, we would authenticate with a server
-    // For demo purposes, we'll just navigate to the About page
-    toast({
-      title: "Success",
-      description: "Welcome back!",
-    });
-    
-    navigate("/about");
+    try {
+      setIsLoading(true);
+      const response = await loginUser({ email, password });
+      
+      // Store user data and token in localStorage
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify({
+        id: response.data._id,
+        name: response.data.name,
+        email: response.data.email,
+        image: response.data.image,
+        role: response.data.role,
+        bio: response.data.bio
+      }));
+
+      toast({
+        title: "Success",
+        description: `Welcome back, ${response.data.name}!`,
+      });
+      
+      navigate("/threads");
+    } catch (error: any) {
+      toast({
+        title: "Login Failed",
+        description: error.response?.data?.message || "Invalid credentials",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -94,6 +118,7 @@ const LoginPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="yayan@durian.cc"
                 className="login-form-input"
+                disabled={isLoading}
               />
             </div>
 
@@ -111,6 +136,7 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••••••••••"
                 className="login-form-input"
+                disabled={isLoading}
               />
             </div>
 
@@ -130,8 +156,9 @@ const LoginPage = () => {
             <Button
               type="submit"
               className="login-button"
+              disabled={isLoading}
             >
-              Login
+              {isLoading ? "Logging in..." : "Login"}
             </Button>
           </form>
 
