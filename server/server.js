@@ -16,7 +16,7 @@ const app = express();
 
 // Enhanced CORS configuration
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN || '*', // Use environment variable or allow all
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173', // Make sure this matches your frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
