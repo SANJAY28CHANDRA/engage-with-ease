@@ -1,8 +1,7 @@
 
 import MainLayout from "../components/MainLayout";
-import Header from "../components/Header";
 import { useState } from "react";
-import { Search, HelpCircle, Book, MessageSquare, Settings, User } from "lucide-react";
+import { Search, HelpCircle, Book, MessageSquare, Settings, User, ChevronDown } from "lucide-react";
 import { 
   Accordion,
   AccordionContent,
@@ -18,9 +17,10 @@ const HelpPage = () => {
   return (
     <MainLayout initialIsLoggedIn={isLoggedIn}>
       <div>
-        <Header title="Help & Support">
-          <p>Find answers to your questions and get assistance</p>
-        </Header>
+        <div className="header-container">
+          <h1 className="header-title">Help & Support</h1>
+          <p className="header-subtitle">Find answers to your questions and get assistance</p>
+        </div>
 
         <div className="search-container">
           <Search className="search-icon" size={20} />
@@ -35,30 +35,33 @@ const HelpPage = () => {
 
         <div className="help-categories">
           <button className="category-button">
-            <Book size={24} className="category-icon" />
+            <Book size={28} className="category-icon" />
             <span className="category-title">User Guides</span>
             <span className="category-subtitle">How to use the platform</span>
           </button>
           
           <button className="category-button">
-            <MessageSquare size={24} className="category-icon" />
+            <MessageSquare size={28} className="category-icon" />
             <span className="category-title">Community Forum</span>
             <span className="category-subtitle">Ask the community</span>
           </button>
           
           <button className="category-button">
-            <HelpCircle size={24} className="category-icon" />
+            <HelpCircle size={28} className="category-icon" />
             <span className="category-title">FAQ</span>
             <span className="category-subtitle">Frequently asked questions</span>
           </button>
         </div>
 
         <div className="help-content">
-          <div>
+          <div className="content-section">
             <h2 className="section-title">Frequently Asked Questions</h2>
-            <Accordion type="single" collapsible className="contact-space">
+            <Accordion type="single" collapsible>
               <AccordionItem value="item-1" className="faq-item">
-                <AccordionTrigger className="accordion-trigger">How do I create an account?</AccordionTrigger>
+                <AccordionTrigger className="accordion-trigger">
+                  How do I create an account?
+                  <ChevronDown className="chevron-icon" size={20} />
+                </AccordionTrigger>
                 <AccordionContent className="accordion-content">
                   To create an account, click on the "Login" button at the top of the page, 
                   then select "Register" option. Fill out the required information and submit the form.
@@ -66,7 +69,10 @@ const HelpPage = () => {
               </AccordionItem>
               
               <AccordionItem value="item-2" className="faq-item">
-                <AccordionTrigger className="accordion-trigger">How do I create a thread?</AccordionTrigger>
+                <AccordionTrigger className="accordion-trigger">
+                  How do I create a thread?
+                  <ChevronDown className="chevron-icon" size={20} />
+                </AccordionTrigger>
                 <AccordionContent className="accordion-content">
                   To create a thread, navigate to the Threads page and use the post creation area at the top. 
                   Enter your content and click the "POST" button. You must be logged in to create a thread.
@@ -74,7 +80,10 @@ const HelpPage = () => {
               </AccordionItem>
               
               <AccordionItem value="item-3" className="faq-item">
-                <AccordionTrigger className="accordion-trigger">How do I save a thread?</AccordionTrigger>
+                <AccordionTrigger className="accordion-trigger">
+                  How do I save a thread?
+                  <ChevronDown className="chevron-icon" size={20} />
+                </AccordionTrigger>
                 <AccordionContent className="accordion-content">
                   To save a thread, click the save icon (bookmark) on the thread you want to save. 
                   Saved threads can be accessed from the "Saved" section in the sidebar.
@@ -82,7 +91,10 @@ const HelpPage = () => {
               </AccordionItem>
               
               <AccordionItem value="item-4" className="faq-item">
-                <AccordionTrigger className="accordion-trigger">How do I create a community?</AccordionTrigger>
+                <AccordionTrigger className="accordion-trigger">
+                  How do I create a community?
+                  <ChevronDown className="chevron-icon" size={20} />
+                </AccordionTrigger>
                 <AccordionContent className="accordion-content">
                   To create a community, click on the "Create Community" button in the sidebar. 
                   Fill in the details about your community and submit the form. You need to be logged in to create a community.
@@ -91,9 +103,9 @@ const HelpPage = () => {
             </Accordion>
           </div>
           
-          <div>
+          <div className="content-section">
             <h2 className="section-title">Get Help By Category</h2>
-            <div className="contact-space">
+            <div>
               <button className="help-category-button">
                 <div className="help-category-icon-container">
                   <User size={20} className="help-category-icon" />
