@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Search, LogIn, LogOut, User } from "lucide-react";
+import { Search, LogIn, LogOut } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import "./Topbar.css";
 
@@ -99,7 +99,6 @@ const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
               className="profile-button"
               onClick={handleProfileClick}
             >
-              <User size={18} />
               {user.name}
             </button>
             <button 
