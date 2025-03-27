@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Search, LogIn, LogOut } from "lucide-react";
@@ -17,7 +16,6 @@ const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in on component mount
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
@@ -40,7 +38,6 @@ const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
   };
 
   const handleLogoutClick = () => {
-    // Clear user data and token from localStorage
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     setUser(null);
@@ -95,12 +92,9 @@ const Topbar = ({ isLoggedIn = false, onLoginStatusChange }: TopbarProps) => {
         
         {user ? (
           <div className="auth-buttons">
-            <button 
-              className="profile-button"
-              onClick={handleProfileClick}
-            >
+            <span className="username-display">
               {user.name}
-            </button>
+            </span>
             <button 
               className="auth-button"
               onClick={handleLogoutClick}
