@@ -1,69 +1,102 @@
-# Welcome to your Lovable project
 
-## Project info
+# ConnectForum - MERN Stack Discussion Platform
 
-**URL**: https://lovable.dev/projects/ea870fa0-83f1-4f40-ac81-332ee3ae55f0
+A full-featured forum application built with the MERN stack (MongoDB, Express.js, React, Node.js).
 
-## How can I edit this code?
+## Project Structure
 
-There are several ways of editing your application.
+```
+├── public/                  # Static files
+├── server/                  # Backend code
+│   ├── config/              # Database configuration
+│   ├── controllers/         # API controllers
+│   ├── middleware/          # Express middleware
+│   ├── models/              # Mongoose models
+│   ├── routes/              # API routes
+│   ├── .env                 # Environment variables (not in git)
+│   ├── .env.example         # Example environment variables
+│   └── server.js            # Entry point for the backend
+├── src/                     # Frontend code
+│   ├── components/          # React components
+│   │   ├── layout/          # Layout components
+│   │   └── ui/              # UI components
+│   ├── hooks/               # Custom React hooks
+│   ├── lib/                 # Utility functions
+│   ├── pages/               # Page components
+│   ├── services/            # API services
+│   ├── types/               # TypeScript type definitions
+│   ├── App.tsx              # Main App component
+│   └── main.tsx             # Entry point for the frontend
+├── .gitignore               # Git ignore file
+├── index.html               # HTML template
+├── package.json             # Project dependencies
+├── tsconfig.json            # TypeScript configuration
+└── vite.config.ts           # Vite configuration
+```
 
-**Use Lovable**
+## Getting Started
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ea870fa0-83f1-4f40-ac81-332ee3ae55f0) and start prompting.
+### Prerequisites
 
-Changes made via Lovable will be committed automatically to this repo.
+- Node.js (v14 or newer)
+- MongoDB Atlas account or local MongoDB installation
 
-**Use your preferred IDE**
+### Setup Instructions
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. **Clone the repository**
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+git clone <repository-url>
+cd connectforum
+```
 
-Follow these steps:
+2. **Install dependencies**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+```bash
+# Install frontend dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install backend dependencies
+cd server
+npm install
+cd ..
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+3. **Configure environment variables**
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+Copy the example environment file and update with your values:
+
+```bash
+cp server/.env.example server/.env
+```
+
+Edit `server/.env` with your MongoDB connection string and JWT secret.
+
+4. **Run the application**
+
+```bash
+# Terminal 1: Start the backend server
+cd server
+npm start
+
+# Terminal 2: Start the frontend development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The frontend will be available at http://localhost:5173
+The backend API will be available at http://localhost:5000/api
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Features
 
-**Use GitHub Codespaces**
+- User authentication (register, login, profile management)
+- Create and manage discussion threads
+- Reply to threads and vote on content
+- Category-based organization
+- Responsive design for mobile and desktop
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Technologies Used
 
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/ea870fa0-83f1-4f40-ac81-332ee3ae55f0) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+- **Frontend**: React, TypeScript, Tailwind CSS, Shadcn UI
+- **Backend**: Node.js, Express.js, MongoDB with Mongoose
+- **Authentication**: JWT (JSON Web Tokens)
+- **Build Tools**: Vite
